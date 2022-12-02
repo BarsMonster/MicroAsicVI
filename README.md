@@ -1,10 +1,12 @@
 ![](../../workflows/wokwi/badge.svg) 
 Go to https://tinytapeout.com for instructions! 
 
-# MicroAsicV
+# MicroAsicVI - Oscillators & TRNG
 
 This is TinyTapeout submission on Verilog. It implements 7 oscillators, and divides clock to allow external measurements via slow IO. 
-As we only have access to Verilog, to ensure oscillators are not optimized away they use shift register data as second input. With physical chips at hand one will be able to compare practical results vs analog simulation at multiple temperatures / voltages. 
+As we only have access to Verilog, to ensure oscillators are not optimized away they use shift register data as second input. With physical chips at hand one will be able to compare practical results vs analog simulation at multiple temperatures / voltages.
+
+True random number generator is XOR of output of multiple ring oscillators, latched by clk_in.  
 
 # In pinout: 
 ```
@@ -24,7 +26,7 @@ As we only have access to Verilog, to ensure oscillators are not optimized away 
 3: clock divided by 2^22
 4: clock divided by 2^26
 5: clock divided by 2^30
-6: clock divided by 2^32
+6: True random number generator output (generator type selected by 3-bit clock selection)
 7: Bit 11 of shift register (to ensure it's not optimized away)
 ```
 

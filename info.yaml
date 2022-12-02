@@ -16,7 +16,7 @@ documentation:
   author:       "Mikhail Svarichevsky"      # Your name
   discord:      "ZeptoBars#7360"      # Your discord handle
   title:        "MicroASIC VI"      # Project title
-  description:  "Free-running oscillators to verify simulation vs reality"      # Short description of what your project does
+  description:  "Free-running oscillators to verify simulation vs reality + TRNG"      # Short description of what your project does
   how_it_works: "Combinational loops with dividers to bring output frequency to <50kHz range"      # Longer description of how the project works
   how_to_test:  "after reset, the counter should increase by one every second"      # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   external_hw:  "You might benefit from frequency counter than can do averaging across extended period of time. "      # Describe any external hardware needed

@@ -7,7 +7,7 @@ TinyTapeout is an educational project that aims to make it easier and cheaper th
 Go to https://tinytapeout.com for instructions!
 
 ## How to change the Wokwi project
-
+ 
 Edit the [info.yaml](info.yaml) and change the wokwi_id to match your project.
 
 ## How to enable the GitHub actions to build the ASIC files

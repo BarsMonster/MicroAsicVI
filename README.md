@@ -1,34 +1,47 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg)
+![](../../workflows/wokwi/badge.svg)
+Go to https://tinytapeout.com for instructions! 
 
-# What is Tiny Tapeout?
+# MicroAsicV
 
-TinyTapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip!
+This is TinyTapeout submission on Verilog. It implements 7 oscillators, and divides clock to allow external measurements via slow IO. 
+As we only have access to Verilog, to ensure oscillators are not optimized away they use shift register data as second input. With physical chips at hand one will be able to compare practical results vs analog simulation at multiple temperatures / voltages. 
 
-Go to https://tinytapeout.com for instructions!
+# In pinout: 
+```
+0: clock in (for debugging)
+1: reset
+2: shift register clk
+3: shift register data
+4-6: clock source id
+7: unused
+```
 
-## How to change the Wokwi project
- 
-Edit the [info.yaml](info.yaml) and change the wokwi_id to match your project.
+# Out pinout: 
+```
+0: clock divided by 2^10
+1: clock divided by 2^14
+2: clock divided by 2^18
+3: clock divided by 2^22
+4: clock divided by 2^26
+5: clock divided by 2^30
+6: clock divided by 2^32
+7: Bit 11 of shift register (to ensure it's not optimized away)
+```
 
-## How to enable the GitHub actions to build the ASIC files
+# Oscillator selection:
+XOR, NAND requires ones in shift register. 
+NOR requires 0's. 
+Full adder requies odd or even bits set to 1 (but not both). 
 
-Please see the instructions for:
+```
+b000: clk_in
+b001: 3-stage XOR oscillator (can be set to 1 or 3 inversions through shift register)
+b002: 5-stage XOR oscillator (can be set to 1, 3 or 5 inversions through shift register)
+b003: 1-stage XOR oscillator (unlikely to work)
+b004: 2-stage XOR oscillator (requires only one '1' in shift register to have single inversion)
+b005: 5-stage NAND oscillator (can be set to 1, 3 or 5 inversions through shift register)
+b006: 5-stage NOR oscillator (can be set to 1, 3 or 5 inversions through shift register)
+b007: 5-stage Full adder oscillator
+```
 
-* [Enabling GitHub Actions](https://tinytapeout.com/faq/#when-i-commit-my-change-the-gds-action-isnt-running)
-* [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
 
-## How does it work?
-
-When you edit the info.yaml to choose a different ID, the [GitHub Action](.github/workflows/gds.yaml) will fetch the digital netlist of your design from Wokwi.
-
-After that, the action uses the open source ASIC tool called [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/) to build the files needed to fabricate an ASIC.
-
-## Resources
-
-* [FAQ](https://tinytapeout.com/faq/)
-* [Digital design lessons](https://tinytapeout.com/digital_design/)
-* [Join the community](https://discord.gg/rPK2nSjxy8)
-
-## What next?
-
-* Share your GDS on Twitter, tag it [#tinytapeout](https://twitter.com/hashtag/tinytapeout?src=hashtag_click) and [link me](https://twitter.com/matthewvenn)!

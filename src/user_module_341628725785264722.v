@@ -119,6 +119,21 @@ always @ (*) begin
         3'b111 : selected_clock = c7_output;
     endcase
 end
+
+/*Random generator*/
+reg random_out;
+always @ (posedge clk) begin
+    case (clk_source)
+        3'b000 : random_out = c0_output ^ c1_output;  
+        3'b001 : random_out = c2_output ^ c3_output;  
+        3'b010 : random_out = c4_output ^ c5_output;  
+        3'b011 : random_out = c6_output ^ c7_output;  
+        3'b100 : random_out = c0_output ^ c1_output ^ c2_output ^ c3_output;
+        3'b101 : random_out = c4_output ^ c5_output ^ c6_output ^ c7_output;
+        3'b110 : random_out = c0_output ^ c1_output ^ c2_output ^ c3_output ^ c4_output ^ c5_output ^ c6_output ^ c7_output;
+        3'b111 : random_out = c1_output ^ c2_output;
+    endcase
+end
   
 reg [29 : 0] data;
 assign io_out[0] = data[7];
@@ -127,7 +142,7 @@ assign io_out[2] = data[15];
 assign io_out[3] = data[19];
 assign io_out[4] = data[23];
 assign io_out[5] = data[27];
-assign io_out[6] = data[29];
+assign io_out[6] = random_out;
 assign io_out[7] = shifter[11];
 //div4_341628725785264722 tmp1(clk, rst_n, io_out[6]);
 

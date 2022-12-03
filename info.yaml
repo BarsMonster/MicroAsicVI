@@ -18,26 +18,28 @@ documentation:
   title:        "MicroASIC VI"      # Project title
   description:  "Free-running oscillators to verify simulation vs reality + TRNG"      # Short description of what your project does
   how_it_works: "Combinational loops with dividers to bring output frequency to <50kHz range"      # Longer description of how the project works
-  how_to_test:  "after reset, the counter should increase by one every second"      # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
+  how_to_test:  "Select oscillator (pins 4-6) and mesaure frequency on one of output pins. Observe true random numbers at pin 7."      # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   external_hw:  "You might benefit from frequency counter than can do averaging across extended period of time. "      # Describe any external hardware needed
   language:     "verilog" # other examples include Verilog, Amaranth, VHDL, etc
   doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository
   clock_hz:     1000       # Clock frequency in Hz (if required)
   picture:      ""      # relative path to a picture in your repository
   inputs:               # a description of what the inputs do
-    - 0: clock in (for debugging)
-    - 1: reset
-    - 2: shift register clk
-    - 3: shift register data
-    - 4-6: clock source id
-    - 7: unused  
+    - clock in (for debugging)
+    - reset
+    - shift register clk
+    - shift register data
+    - clock source id_0
+    - clock source id_1
+    - clock source id_2
+    - unused  
   outputs:
-    - 0: clock divided by 2^10
-    - 1: clock divided by 2^14
-    - 2: clock divided by 2^18
-    - 3: clock divided by 2^22
-    - 4: clock divided by 2^26
-    - 5: clock divided by 2^30
-    - 6: clock divided by 2^32
-    - 7: Bit 11 of shift register (to ensure it's not optimized away)
+    - clock divided by 2^10
+    - clock divided by 2^14
+    - clock divided by 2^18
+    - clock divided by 2^22
+    - clock divided by 2^26
+    - clock divided by 2^30
+    - clock divided by 2^32
+    - Bit 11 of shift register (to ensure it's not optimized away)
 
